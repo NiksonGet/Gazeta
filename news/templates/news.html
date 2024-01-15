@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<main class="container mt-3 mb-5">
+	<h3 class="border-bottom pb-1 my-4">All News</h3>
+    <!-- News Box -->
+    {% for post in news %}
+	<div class="card mb-4 shadow">
+	  <div class="row no-gutters">
+	    <div class="col-md-3">
+            <img src="/media/{{post.image}}" class="card-img-top" alt="{{post.title}}">
+	    </div>
+	    <div class="col-md-8">
+	      <div class="card-body">
+	        <h5 class="card-title">{{post.title}}</h5>
+	        <p class="card-text">{{post.detail}}</p>
+	        <p class="card-text"><a href="/detail/{{post.id}}" class="btn btn-sm btn-primary btn-success">Read Full</a></p>
+	      </div>
+	    </div>
+	  </div>
+    </div>
+    {% endfor %}
+</main>
+{% endblock %}

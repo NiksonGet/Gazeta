@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block content %}
+<main class="container mt-3 mb-5">
+	<!-- featured news -->
+	<div class="row my-3">
+		<!-- Left -->
+		<div class="col-md-7">
+			<div class="card mb-3">
+			  <img src="media/{{post.image}}" class="card-img-top" alt="{{post.title}}">
+			  <div class="card-body">
+			    <h5 class="card-title">{{post.title}}</h5>
+			    <hr/>
+			    <p class="card-text"><a href="/detail/{{post.id}}" class="btn btn-sm btn-primary btn-success">Read Full</a></p>
+			  </div>
+			</div>
+		</div>
+		<!-- Right -->
+		<div class="col-md-5" style="max-height: 450px; overflow: auto;">
+			{% for p in posts %}
+			<!-- News Box -->
+			<div class="card">
+			  <div class="row no-gutters">
+			    <div class="col-md-4">
+					<img src="media/{{p.image}}" class="card-img-top" alt="{{p.title}}">
+			    </div>
+			    <div class="col-md-8">
+			      <div class="card-body">
+			        <h5 class="card-title">{{p.title}}</h5>
+			        <p class="card-text"><a href="/detail/{{p.id}}" class="btn btn-sm btn-primary btn-success">Read Full</a></p>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			<hr/>
+			{% endfor %}
+		</div>
+	</div>
+	<!-- Category Wise News -->
+	{% for category in categories %}
+	<h3 class="border-bottom pb-1">{{category.title}} <a href="/category/{{category.id}}" class="float-right btn btn-sm btn-dark">In this Category</a></h3>
+	<div class="row my-4">
+		{% for news in category.news_set.all %}
+			{% if forloop.counter < 5 %}
+			<!-- News box -->
+			<div class="col-md-3">
+				<div class="card mb-3 shadow">
+				<img src="/media/{{news.image}}" class="card-img-top" alt="{{news.title}}">
+				<div class="card-body">
+					<h5 class="card-title">{{news.title}}</h5>
+					<hr/>
+					<p class="card-text"><a href="#" class="btn btn-sm btn-primary btn-success">Read Full</a></p>
+				</div>
+				</div>
+			</div>
+			{% endif %}
+		{% endfor %}
+	</div>
+	{% endfor %}
+	<!-- End Single Category -->
+</main>
+{% endblock %}
